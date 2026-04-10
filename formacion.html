@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoja de Vida – Formación Académica</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">🇨🇴 <span>Formato Único</span> Hoja de Vida</div>
+  <div class="header-info">Rol: Usuario &nbsp;|&nbsp; Sección 2 de 5</div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html"><span class="num">1</span> Datos Personales</a></li>
+    <li><a href="formacion.html" class="activo"><span class="num">2</span> Formación Académica</a></li>
+    <li><a href="experiencia.html"><span class="num">3</span> Experiencia Laboral</a></li>
+    <li><a href="tiempo.html"><span class="num">4</span> Tiempo de Experiencia</a></li>
+    <li><a href="certificacion.html"><span class="num">5</span> Certificación</a></li>
+    <li><a href="admin.html"><span class="num">A</span> Administrador</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+  <div id="alerta-global" class="alerta"><span></span></div>
+
+  <!-- Educación Básica y Media -->
+  <section class="card">
+    <h2 class="section-title"> Educación Básica y Media</h2>
+
+    <p style="font-size:0.82rem;color:var(--gris-medio);margin-bottom:1rem;">
+      Marque el último grado aprobado (grados 1°–6° de bachillerato = grados 6°–11° de educación básica secundaria y media).
+    </p>
+
+    <div class="form-grid cols-3">
+      <div class="form-group span-3">
+        <label>Último grado aprobado <span class="req">*</span></label>
+        <div class="radio-group" id="gradoBasica">
+          <label class="radio-btn"><input type="radio" name="grado" value="1o" /> 1°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="2o" /> 2°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="3o" /> 3°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="4o" /> 4°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="5o" /> 5°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="6o" /> 6°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="7o" /> 7°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="8o" /> 8°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="9o" /> 9°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="10" /> 10°</label>
+          <label class="radio-btn"><input type="radio" name="grado" value="11" /> 11°</label>
+        </div>
+        <span class="msg-error" id="err-gradoBasica"></span>
+      </div>
+
+      <div class="form-group">
+        <label>Nivel <span class="req">*</span></label>
+        <select id="nivelBasica">
+          <option value="">-- Seleccione --</option>
+          <option value="primaria">Primaria</option>
+          <option value="secundaria">Secundaria</option>
+          <option value="media">Media</option>
+        </select>
+        <span class="msg-error" id="err-nivelBasica"></span>
+      </div>
+
+      <div class="form-group">
+        <label>Título obtenido</label>
+        <input type="text" id="tituloBasica" placeholder="Ej: Bachiller académico" />
+        <span class="msg-error" id="err-tituloBasica"></span>
+      </div>
+
+      <div class="form-group">
+        <label>Fecha de grado (MM/AAAA) <span class="req">*</span></label>
+        <input type="month" id="fechaGradoBasica" />
+        <span class="msg-error" id="err-fechaGradoBasica"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Educación Superior -->
+  <section class="card">
+    <h2 class="section-title"> Educación Superior (Pregrado y Postgrado)</h2>
+
+    <p style="font-size:0.82rem;color:var(--gris-medio);margin-bottom:1rem;">
+      Diligencie en estricto orden cronológico. Puede agregar tantos estudios como necesite.
+    </p>
+
+    <div id="contenedor-superior"></div>
+
+    <button class="btn-add" onclick="agregarEstudio()">＋ Agregar estudio</button>
+    <span class="msg-error" id="err-superior" style="display:block;margin-top:8px;"></span>
+  </section>
+
+  <!-- Idiomas -->
+  <section class="card">
+    <h2 class="section-title"> Idiomas Diferentes al Español</h2>
+    <p style="font-size:0.82rem;color:var(--gris-medio);margin-bottom:1rem;">
+      Especifique los idiomas que habla, lee y escribe de forma Regular (R), Bien (B) o Muy Bien (MB).
+    </p>
+
+    <div id="contenedor-idiomas"></div>
+
+    <button class="btn-add" onclick="agregarIdioma()">＋ Agregar idioma</button>
+  </section>
+
+  <!-- Vista Previa -->
+  <div id="preview" class="preview-panel">
+    <h3> Vista Previa — Formación Académica</h3>
+    <div id="preview-contenido"></div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="acciones">
+    <button class="btn btn-secondary" onclick="window.location.href='index.html'">← Anterior</button>
+    <button class="btn btn-secondary" onclick="verPrevia()">👁️ Ver Vista Previa</button>
+    <button class="btn btn-primary" onclick="guardarYSiguiente()">Siguiente: Experiencia Laboral →</button>
+  </div>
+</main>
+
+<footer>
+  <span>Formato Único Hoja de Vida</span> — Leyes 190 de 1995, 489 y 443 de 1998
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/formacion.js"></script>
+</body>
+</html>

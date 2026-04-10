@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoja de Vida – Administrador</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">🇨🇴 <span>Formato Único</span> Hoja de Vida</div>
+  <div class="header-info">Rol: <strong style="color:var(--dorado-claro)">Administrador</strong></div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html"><span class="num">1</span> Datos Personales</a></li>
+    <li><a href="formacion.html"><span class="num">2</span> Formación Académica</a></li>
+    <li><a href="experiencia.html"><span class="num">3</span> Experiencia Laboral</a></li>
+    <li><a href="tiempo.html"><span class="num">4</span> Tiempo de Experiencia</a></li>
+    <li><a href="certificacion.html"><span class="num">5</span> Certificación</a></li>
+    <li><a href="admin.html" class="activo"><span class="num">A</span> Administrador</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div id="alerta-global" class="alerta"><span></span></div>
+
+  <!-- Panel: Lista de HV -->
+  <section class="card" id="panel-lista">
+    <h2 class="section-title"> Gestión de Hojas de Vida</h2>
+
+    <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.2rem">
+      <div class="form-group" style="min-width:200px;margin:0">
+        <label>Filtrar por estado</label>
+        <select id="filtroEstado" onchange="filtrarHV()">
+          <option value="">Todas</option>
+          <option value="diligenciada">Diligenciada</option>
+          <option value="aceptada">Aceptada</option>
+          <option value="rechazada">Rechazada</option>
+        </select>
+      </div>
+      <button class="btn btn-secondary btn-sm" style="margin-top:18px" onclick="filtrarHV()"> Actualizar</button>
+    </div>
+
+    <div class="tabla-wrapper">
+      <table id="tabla-hv">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla">
+          <!-- Se llena por JS -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Panel: Detalle de HV seleccionada -->
+  <section class="card" id="panel-detalle" style="display:none">
+    <h2 class="section-title"> Detalle de Hoja de Vida</h2>
+
+    <div id="detalle-contenido"></div>
+
+    <div style="margin-top:1.5rem">
+      <div class="form-group" style="max-width:300px">
+        <label>Cambiar estado</label>
+        <select id="nuevoEstado">
+          <option value="diligenciada">Diligenciada</option>
+          <option value="aceptada">Aceptada</option>
+          <option value="rechazada">Rechazada</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="acciones">
+      <button class="btn btn-secondary" onclick="cerrarDetalle()">← Volver a la lista</button>
+      <button class="btn btn-dorado" onclick="cambiarEstado()"> Guardar cambio de estado</button>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Formato Único Hoja de Vida</span> — Leyes 190 de 1995, 489 y 443 de 1998
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

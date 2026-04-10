@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoja de Vida – Tiempo de Experiencia</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">🇨🇴 <span>Formato Único</span> Hoja de Vida</div>
+  <div class="header-info">Rol: Usuario &nbsp;|&nbsp; Sección 4 de 5</div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html"><span class="num">1</span> Datos Personales</a></li>
+    <li><a href="formacion.html"><span class="num">2</span> Formación Académica</a></li>
+    <li><a href="experiencia.html"><span class="num">3</span> Experiencia Laboral</a></li>
+    <li><a href="tiempo.html" class="activo"><span class="num">4</span> Tiempo de Experiencia</a></li>
+    <li><a href="certificacion.html"><span class="num">5</span> Certificación</a></li>
+    <li><a href="admin.html"><span class="num">A</span> Administrador</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+  <div id="alerta-global" class="alerta"><span></span></div>
+
+  <section class="card">
+    <h2 class="section-title"> Tiempo Total de Experiencia</h2>
+    <p style="font-size:0.82rem;color:var(--gris-medio);margin-bottom:1.5rem;">
+      Indique el tiempo total de experiencia laboral en años y meses por cada tipo de ocupación.
+      El total se calcula automáticamente.
+    </p>
+
+    <!-- Servidor Público -->
+    <div class="bloque-dinamico" style="margin-bottom:1rem;">
+      <div class="bloque-num">Servidor Público</div>
+      <div class="form-grid cols-3">
+        <div class="form-group">
+          <label>Años <span class="req">*</span></label>
+          <input type="number" id="sp-anios" min="0" max="50" placeholder="0" value="0" oninput="recalcular()" />
+          <span class="msg-error" id="err-sp-anios"></span>
+        </div>
+        <div class="form-group">
+          <label>Meses <span class="req">*</span></label>
+          <input type="number" id="sp-meses" min="0" max="11" placeholder="0" value="0" oninput="recalcular()" />
+          <span class="msg-error" id="err-sp-meses"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sector Privado -->
+    <div class="bloque-dinamico" style="margin-bottom:1rem;">
+      <div class="bloque-num">Empleado del Sector Privado</div>
+      <div class="form-grid cols-3">
+        <div class="form-group">
+          <label>Años <span class="req">*</span></label>
+          <input type="number" id="priv-anios" min="0" max="50" placeholder="0" value="0" oninput="recalcular()" />
+          <span class="msg-error" id="err-priv-anios"></span>
+        </div>
+        <div class="form-group">
+          <label>Meses <span class="req">*</span></label>
+          <input type="number" id="priv-meses" min="0" max="11" placeholder="0" value="0" oninput="recalcular()" />
+          <span class="msg-error" id="err-priv-meses"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trabajador Independiente -->
+    <div class="bloque-dinamico" style="margin-bottom:1.5rem;">
+      <div class="bloque-num">Trabajador Independiente</div>
+      <div class="form-grid cols-3">
+        <div class="form-group">
+          <label>Años <span class="req">*</span></label>
+          <input type="number" id="ind-anios" min="0" max="50" placeholder="0" value="0" oninput="recalcular()" />
+          <span class="msg-error" id="err-ind-anios"></span>
+        </div>
+        <div class="form-group">
+          <label>Meses <span class="req">*</span></label>
+          <input type="number" id="ind-meses" min="0" max="11" placeholder="0" value="0" oninput="recalcular()" />
+          <span class="msg-error" id="err-ind-meses"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total calculado -->
+    <div style="background:linear-gradient(135deg,#e3f0fb,#fffdf4);border:2px solid var(--azul-medio);border-radius:10px;padding:1.2rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:.5px;color:var(--gris-medio);font-weight:700">Total Experiencia</div>
+        <div id="total-display" style="font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--azul);font-weight:700;margin-top:4px;">0 años, 0 meses</div>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="calcularDesdeExperiencia()">
+         Calcular desde experiencias ingresadas
+      </button>
+    </div>
+  </section>
+
+  <!-- Vista previa -->
+  <div id="preview" class="preview-panel">
+    <h3> Vista Previa — Tiempo de Experiencia</h3>
+    <div id="preview-contenido" class="preview-grid"></div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="acciones">
+    <button class="btn btn-secondary" onclick="window.location.href='experiencia.html'">← Anterior</button>
+    <button class="btn btn-secondary" onclick="verPrevia()"> Ver Vista Previa</button>
+    <button class="btn btn-primary" onclick="guardarYSiguiente()">Siguiente: Certificación →</button>
+  </div>
+</main>
+
+<footer>
+  <span>Formato Único Hoja de Vida</span> — Leyes 190 de 1995, 489 y 443 de 1998
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/tiempo.js"></script>
+</body>
+</html>

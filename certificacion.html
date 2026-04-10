@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoja de Vida – Certificación</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">🇨🇴 <span>Formato Único</span> Hoja de Vida</div>
+  <div class="header-info">Rol: Usuario &nbsp;|&nbsp; Sección 5 de 5</div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html"><span class="num">1</span> Datos Personales</a></li>
+    <li><a href="formacion.html"><span class="num">2</span> Formación Académica</a></li>
+    <li><a href="experiencia.html"><span class="num">3</span> Experiencia Laboral</a></li>
+    <li><a href="tiempo.html"><span class="num">4</span> Tiempo de Experiencia</a></li>
+    <li><a href="certificacion.html" class="activo"><span class="num">5</span> Certificación</a></li>
+    <li><a href="admin.html"><span class="num">A</span> Administrador</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+  <div id="alerta-global" class="alerta"><span></span></div>
+
+  <!-- ══ RESUMEN COMPLETO ══════════════════════════════════════════════ -->
+  <section class="card">
+    <h2 class="section-title"> Resumen Completo de la Hoja de Vida</h2>
+    <p style="font-size:0.85rem;color:var(--gris-medio);margin-bottom:1.5rem;">
+      Revise toda la información ingresada antes de firmar y enviar. Si necesita corregir algo, use la navegación superior.
+    </p>
+
+    <div class="resumen-bloque">
+      <div class="resumen-bloque-titulo"> 1. Datos Personales</div>
+      <div id="resumen-personales" class="preview-grid">
+        <p class="resumen-vacio">Sin datos ingresados. <a href="index.html">Ir a Datos Personales →</a></p>
+      </div>
+    </div>
+
+    <div class="resumen-bloque">
+      <div class="resumen-bloque-titulo"> 2. Formación Académica</div>
+      <div id="resumen-formacion">
+        <p class="resumen-vacio">Sin datos ingresados. <a href="formacion.html">Ir a Formación Académica →</a></p>
+      </div>
+    </div>
+
+    <div class="resumen-bloque">
+      <div class="resumen-bloque-titulo"> 3. Experiencia Laboral</div>
+      <div id="resumen-experiencia">
+        <p class="resumen-vacio">Sin datos ingresados. <a href="experiencia.html">Ir a Experiencia Laboral →</a></p>
+      </div>
+    </div>
+
+    <div class="resumen-bloque">
+      <div class="resumen-bloque-titulo"> 4. Tiempo Total de Experiencia</div>
+      <div id="resumen-tiempo" class="preview-grid">
+        <p class="resumen-vacio">Sin datos ingresados. <a href="tiempo.html">Ir a Tiempo de Experiencia →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CERTIFICACIÓN ═════════════════════════════════════════════════ -->
+  <section class="card">
+    <h2 class="section-title"> Certificación y Juramento</h2>
+
+    <div class="cert-box">
+      <p>
+        <strong>Manifiesto bajo la gravedad del juramento</strong> que no me encuentro dentro
+        de las causales de inhabilidad e incompatibilidad del orden constitucional o legal,
+        para ejercer cargos o empleos públicos o para celebrar contratos de prestación de
+        servicios con la Administración Pública.
+      </p>
+      <p>
+        Para todos los efectos legales, <strong>certifico que los datos por mí anotados en el
+        presente Formato Único de Hoja de Vida son veraces</strong> (Artículo 5°, Ley 190/95).
+      </p>
+
+      <div class="form-grid cols-1" style="max-width:400px;margin:1rem auto 0">
+        <div class="form-group">
+          <label>Nombre del firmante <span class="req">*</span></label>
+          <input type="text" id="nombreFirmante" placeholder="Nombre completo" />
+          <span class="msg-error" id="err-nombreFirmante"></span>
+        </div>
+        <div class="form-group">
+          <label>Fecha <span class="req">*</span></label>
+          <input type="date" id="fechaCert" />
+          <span class="msg-error" id="err-fechaCert"></span>
+        </div>
+        <div class="form-group">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-weight:500">
+            <input type="checkbox" id="chkJuramento" style="width:auto;accent-color:var(--azul-medio)" />
+            Acepto y confirmo el juramento anterior <span class="req">*</span>
+          </label>
+          <span class="msg-error" id="err-chkJuramento"></span>
+        </div>
+      </div>
+
+      <div class="firma-area"></div>
+      <div class="firma-label" id="firma-label-nombre">Firma del servidor público o contratista</div>
+    </div>
+  </section>
+
+  <!-- ══ ESTADO ════════════════════════════════════════════════════════ -->
+  <section class="card">
+    <h2 class="section-title">📋 Estado de la Hoja de Vida</h2>
+    <p style="font-size:0.85rem;color:var(--gris-medio);margin-bottom:1.2rem;">
+      Aquí puede consultar el estado actual de su hoja de vida una vez enviada.
+    </p>
+    <div id="estado-consulta"></div>
+    <div style="margin-top:1rem;">
+      <button class="btn btn-secondary btn-sm" onclick="consultarEstado()"> Consultar estado</button>
+    </div>
+  </section>
+
+  <!-- Acciones -->
+  <div class="acciones">
+    <button class="btn btn-secondary" onclick="window.location.href='tiempo.html'">← Anterior</button>
+    <button class="btn btn-dorado" onclick="enviarHV()"> Enviar Hoja de Vida</button>
+  </div>
+</main>
+
+<footer>
+  <span>Formato Único Hoja de Vida</span> — Leyes 190 de 1995, 489 y 443 de 1998
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/certificacion.js"></script>
+</body>
+</html>

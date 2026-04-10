@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoja de Vida – Experiencia Laboral</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="logo">🇨🇴 <span>Formato Único</span> Hoja de Vida</div>
+  <div class="header-info">Rol: Usuario &nbsp;|&nbsp; Sección 3 de 5</div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="index.html"><span class="num">1</span> Datos Personales</a></li>
+    <li><a href="formacion.html"><span class="num">2</span> Formación Académica</a></li>
+    <li><a href="experiencia.html" class="activo"><span class="num">3</span> Experiencia Laboral</a></li>
+    <li><a href="tiempo.html"><span class="num">4</span> Tiempo de Experiencia</a></li>
+    <li><a href="certificacion.html"><span class="num">5</span> Certificación</a></li>
+    <li><a href="admin.html"><span class="num">A</span> Administrador</a></li>
+  </ul>
+</nav>
+
+<main>
+  <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+  <div id="alerta-global" class="alerta"><span></span></div>
+
+  <section class="card">
+    <h2 class="section-title"> Experiencia Laboral</h2>
+    <p style="font-size:0.82rem;color:var(--gris-medio);margin-bottom:1rem;">
+      Relacione su experiencia en estricto orden cronológico, comenzando por el empleo actual.
+      Puede agregar tantas experiencias como necesite.
+    </p>
+
+    <div id="contenedor-experiencias"></div>
+
+    <button class="btn-add" onclick="agregarExperiencia()">＋ Agregar experiencia</button>
+    <span class="msg-error" id="err-experiencias" style="display:block;margin-top:8px;"></span>
+  </section>
+
+  <!-- Vista previa -->
+  <div id="preview" class="preview-panel">
+    <h3> Vista Previa — Experiencia Laboral</h3>
+    <div id="preview-contenido"></div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="acciones">
+    <button class="btn btn-secondary" onclick="window.location.href='formacion.html'">← Anterior</button>
+    <button class="btn btn-secondary" onclick="verPrevia()"> Ver Vista Previa</button>
+    <button class="btn btn-primary" onclick="guardarYSiguiente()">Siguiente: Tiempo de Experiencia →</button>
+  </div>
+</main>
+
+<footer>
+  <span>Formato Único Hoja de Vida</span> — Leyes 190 de 1995, 489 y 443 de 1998
+</footer>
+
+<script src="js/datos.js"></script>
+<script src="js/experiencia.js"></script>
+</body>
+</html>
