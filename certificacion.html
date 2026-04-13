@@ -100,14 +100,22 @@
         </div>
       </div>
 
-      <div class="firma-area"></div>
-      <div class="firma-label" id="firma-label-nombre">Firma del servidor público o contratista</div>
+      <!-- ── ÁREA DE FIRMA CON CANVAS ─────────────────────────────── -->
+      <div class="firma-canvas-wrapper">
+        <div class="firma-canvas-label">Firma del servidor público o contratista</div>
+        <canvas id="firmaCanvas" width="480" height="140"></canvas>
+        <span class="msg-error" id="err-firma" style="display:block;text-align:center"></span>
+        <div class="firma-canvas-acciones">
+          <button class="btn btn-secondary btn-sm" onclick="limpiarFirma()"> Limpiar firma</button>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- ══ ESTADO ════════════════════════════════════════════════════════ -->
   <section class="card">
-    <h2 class="section-title">📋 Estado de la Hoja de Vida</h2>
+    <h2 class="section-title"> Estado de la Hoja de Vida</h2>
     <p style="font-size:0.85rem;color:var(--gris-medio);margin-bottom:1.2rem;">
       Aquí puede consultar el estado actual de su hoja de vida una vez enviada.
     </p>
