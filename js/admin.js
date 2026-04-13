@@ -38,7 +38,7 @@ function filtrarHV() {
   `).join('');
 }
 
-// ─── CARGAR HV ESPECÍFICA ───
+// ─── CARGAR HV ESPECÍFICA ────
 
 function cargarHV(id) {
   const hv = ColeccionHV.find(h => h.id === id);
@@ -119,12 +119,21 @@ function cambiarEstado() {
 
   const nuevoEstado = document.getElementById('nuevoEstado').value;
   const anterior    = hv.estado;
+
+  // Actualizar estado en la colección
   hv.estado = nuevoEstado;
 
-  // Si es la HV del usuario actual en memoria, también actualizar
+  // Actualizar también dentro del objeto hv.hv si existe
+  if (hv.hv) hv.hv.estado = nuevoEstado;
+
+  // Si es la HV del usuario actual en memoria, también actualizar y persistir
   if (HojaDeVida.datosPersonales?.numDoc === hv.documento) {
     HojaDeVida.estado = nuevoEstado;
+    guardarHVenStorage();
   }
+
+  // Siempre guardar la colección en localStorage
+  guardarColeccionEnStorage();
 
   mostrarAlerta('exito', `✅ Estado cambiado de "${anterior}" a "${nuevoEstado}".`);
 
@@ -136,7 +145,7 @@ function cambiarEstado() {
   }
 }
 
-// ─── CERRAR DETALLE ────
+// ─── CERRAR DETALLE ───
 
 function cerrarDetalle() {
   hvSeleccionadaId = null;

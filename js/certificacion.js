@@ -1,6 +1,11 @@
-// ─── VARIABLES DEL CANVAS ───
+// ─── VARIABLES DEL CANVAS ────
 let canvas, ctx, dibujando = false, firmaRealizada = false;
 let ultimoX = 0, ultimoY = 0;
+
+
+// ─── PLURALIZACIÓN ────
+function fAnios(n) { return parseInt(n) === 1 ? '1 año' : `${n} años`; }
+function fMeses(n) { return parseInt(n) === 1 ? '1 mes' : `${n} meses`; }
 
 document.addEventListener('DOMContentLoaded', () => {
   // Precargar nombre desde datos personales
@@ -21,11 +26,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   iniciarCanvas();
+  restaurarFirma();
   construirResumen();
   consultarEstado();
 });
 
 // ─── CANVAS DE FIRMA ────
+
+function restaurarFirma() {
+  const firmaGuardada = localStorage.getItem('hoja_vida_firma');
+  if (!firmaGuardada) return;
+  const img = new Image();
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0);
+    firmaRealizada = true;
+  };
+  img.src = firmaGuardada;
+}
 
 function iniciarCanvas() {
   canvas = document.getElementById('firmaCanvas');
@@ -83,11 +100,16 @@ function dibujar(e) {
 function terminarTrazo() {
   dibujando = false;
   canvas.classList.remove('activo');
+  // Guardar imagen de la firma en localStorage
+  if (firmaRealizada) {
+    localStorage.setItem('hoja_vida_firma', canvas.toDataURL());
+  }
 }
 
 function limpiarFirma() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   firmaRealizada = false;
+  localStorage.removeItem('hoja_vida_firma');
   canvas.classList.remove('error-canvas');
   document.getElementById('err-firma').textContent = '';
 }
@@ -101,7 +123,7 @@ function validarFirma() {
   return true;
 }
 
-// ─── RESUMEN COMPLETO ───
+// ─── RESUMEN COMPLETO ────
 
 function construirResumen() {
   construirResumenPersonales();
@@ -218,17 +240,17 @@ function construirResumenTiempo() {
   const total = t.total || calcularTotalExperiencia(t.servidorPublico, t.sectorPrivado, t.trabajadorIndep);
   cont.style.padding = '1rem';
   cont.innerHTML = `
-    ${pi('Servidor Público',         `${t.servidorPublico?.anios||0} años, ${t.servidorPublico?.meses||0} meses`)}
-    ${pi('Sector Privado',           `${t.sectorPrivado?.anios||0} años, ${t.sectorPrivado?.meses||0} meses`)}
-    ${pi('Trabajador Independiente', `${t.trabajadorIndep?.anios||0} años, ${t.trabajadorIndep?.meses||0} meses`)}
+    ${pi('Servidor Público',         `${fAnios(t.servidorPublico?.anios||0)}, ${fMeses(t.servidorPublico?.meses||0)}`)}
+    ${pi('Sector Privado',           `${fAnios(t.sectorPrivado?.anios||0)}, ${fMeses(t.sectorPrivado?.meses||0)}`)}
+    ${pi('Trabajador Independiente', `${fAnios(t.trabajadorIndep?.anios||0)}, ${fMeses(t.trabajadorIndep?.meses||0)}`)}
     <div class="preview-item" style="grid-column:1/-1;background:rgba(45,106,159,0.08);border-radius:7px;padding:.5rem .7rem;margin-top:.4rem">
       <span class="pk">⏱️ TOTAL</span>
-      <span class="pv" style="font-weight:700;color:var(--azul);font-size:1.05rem">${total.anios} años, ${total.meses} meses</span>
+      <span class="pv" style="font-weight:700;color:var(--azul);font-size:1.05rem">${fAnios(total.anios)}, ${fMeses(total.meses)}</span>
     </div>
   `;
 }
 
-// ─── VALIDACIÓN ───
+// ─── VALIDACIÓN ────
 
 function validarFormulario() {
   let valido = true;
@@ -257,7 +279,7 @@ function validarFormulario() {
   return valido;
 }
 
-// ─── ENVIAR HV ──
+// ─── ENVIAR HV ───
 
 function enviarHV() {
   if (!validarFormulario()) {
@@ -291,15 +313,19 @@ function enviarHV() {
   consultarEstado();
 }
 
-// ─── CONSULTAR ESTADO ───
+// ─── CONSULTAR ESTADO ────
+
 function consultarEstado() {
   const cont = document.getElementById('estado-consulta');
   const doc  = HojaDeVida.datosPersonales?.numDoc;
   let hvEncontrada = null;
   if (doc) {
+    // Buscar en ColeccionHV y tomar la más reciente
     for (let i = ColeccionHV.length - 1; i >= 0; i--) {
       if (ColeccionHV[i].documento === doc) { hvEncontrada = ColeccionHV[i]; break; }
     }
+    // Sincronizar el estado del objeto HojaDeVida con el de la colección
+    if (hvEncontrada) HojaDeVida.estado = hvEncontrada.estado;
   }
   if (!hvEncontrada) {
     cont.innerHTML = `<div class="estado-card"><div class="estado-icono" style="background:#f0f0f0">📋</div><div><div style="font-weight:600">Sin registros</div><div style="font-size:.82rem;color:var(--gris-medio)">Complete y envíe la hoja de vida para ver su estado.</div></div></div>`;
